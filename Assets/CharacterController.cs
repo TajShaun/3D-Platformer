@@ -35,6 +35,14 @@ public class CharacterController : MonoBehaviour
             myRigidbody.AddForce(transform.up * jumpForce);
         }
 
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            maxSpeed = sprintSpeed;
+        } else
+        {
+            maxSpeed = normalSpeed;
+        }
+
 
         Vector3 newVelocity = (transform.forward * Input.GetAxis("Vertical") * maxSpeed) + (transform.right * Input.GetAxis("Horizontal") * maxSpeed);
         myRigidbody.velocity = new Vector3(newVelocity.x, myRigidbody.velocity.y, newVelocity.z);
