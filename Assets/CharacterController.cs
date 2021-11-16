@@ -13,7 +13,7 @@ public class CharacterController : MonoBehaviour
     float camRotationSpeed = 1.5f;
     GameObject cam;
     Rigidbody myRigidbody;
-    bool isOnGround;
+    public bool isOnGround;
     public GameObject groundChecker;
     public LayerMask groundLayer;
     public float jumpForce = 300.0f;
@@ -23,6 +23,7 @@ public class CharacterController : MonoBehaviour
     {
         cam = GameObject.Find("Main Camera");
         myRigidbody = GetComponent<Rigidbody>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -30,7 +31,7 @@ public class CharacterController : MonoBehaviour
     {
         isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.1f, groundLayer); 
 
-        if (isOnGround == true && Input.GetKeyDown(KeyCode.Space))
+        if (isOnGround && Input.GetKeyDown(KeyCode.Space))
         {
             myRigidbody.AddForce(transform.up * jumpForce);
         }
