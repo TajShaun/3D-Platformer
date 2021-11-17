@@ -18,9 +18,13 @@ public class CharacterController : MonoBehaviour
     public LayerMask groundLayer;
     public float jumpForce = 300.0f;
 
+    public int gemCount;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        gemCount = 0;
         cam = GameObject.Find("Main Camera");
         myRigidbody = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
@@ -29,8 +33,8 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.1f, groundLayer); 
-
+        isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.1f, groundLayer);
+        Debug.Log(isOnGround);
         if (isOnGround && Input.GetKeyDown(KeyCode.Space))
         {
             myRigidbody.AddForce(transform.up * jumpForce);
@@ -52,9 +56,17 @@ public class CharacterController : MonoBehaviour
         rotation = rotation + Input.GetAxis("Mouse X") * rotationSpeed;
         transform.rotation = Quaternion.Euler(new Vector3(0.0f, rotation, 0.0f));
 
+        camRotation = Mathf.Clamp(camRotation, -40.0f, 40.0f);
+
         camRotation = camRotation + Input.GetAxis("Mouse Y") * camRotationSpeed;
         cam.transform.localRotation = Quaternion.Euler(new Vector3(-camRotation, 0.0f, 0.0f));
 
 
+    }
+
+    public void AddGem(int gemValue)
+    {
+        gemCount = gemCount + gemValue;
+        Debug.Log(gemCount);
     }
 }
