@@ -20,10 +20,11 @@ public class CharacterController : MonoBehaviour
 
     public int gemCount;
 
-
+    Animator myAnim;
     // Start is called before the first frame update
     void Start()
     {
+        myAnim = GetComponentInChildren<Animator>();
         gemCount = 0;
         cam = GameObject.Find("Main Camera");
         myRigidbody = GetComponent<Rigidbody>();
@@ -51,7 +52,8 @@ public class CharacterController : MonoBehaviour
 
         Vector3 newVelocity = (transform.forward * Input.GetAxis("Vertical") * maxSpeed) + (transform.right * Input.GetAxis("Horizontal") * maxSpeed);
         myRigidbody.velocity = new Vector3(newVelocity.x, myRigidbody.velocity.y, newVelocity.z);
-    
+
+        myAnim.SetFloat("speed", newVelocity.magnitude);
 
         rotation = rotation + Input.GetAxis("Mouse X") * rotationSpeed;
         transform.rotation = Quaternion.Euler(new Vector3(0.0f, rotation, 0.0f));
