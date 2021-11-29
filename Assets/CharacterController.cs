@@ -25,7 +25,9 @@ public class CharacterController : MonoBehaviour
     void Start()
     {
         myAnim = GetComponentInChildren<Animator>();
+
         gemCount = 0;
+
         cam = GameObject.Find("Main Camera");
         myRigidbody = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
