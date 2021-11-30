@@ -37,9 +37,13 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.1f, groundLayer);
-        Debug.Log(isOnGround);
+      
+
+        myAnim.SetBool("isOnGround", isOnGround);
+
         if (isOnGround && Input.GetKeyDown(KeyCode.Space))
         {
+            myAnim.SetTrigger("jumped");
             myRigidbody.AddForce(transform.up * jumpForce);
         }
 
@@ -65,7 +69,7 @@ public class CharacterController : MonoBehaviour
         camRotation = camRotation + Input.GetAxis("Mouse Y") * camRotationSpeed;
         cam.transform.localRotation = Quaternion.Euler(new Vector3(-camRotation, 0.0f, 0.0f));
 
-
+    
     }
 
     public void AddGem(int gemValue)
