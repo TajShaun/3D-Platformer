@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CharacterController : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class CharacterController : MonoBehaviour
     public GameObject groundChecker;
     public LayerMask groundLayer;
     public float jumpForce = 300.0f;
+    public TextMeshProUGUI scoreText;
 
     public int gemCount;
 
@@ -29,6 +31,7 @@ public class CharacterController : MonoBehaviour
         gemCount = 0;
 
         cam = GameObject.Find("Main Camera");
+
         myRigidbody = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -36,6 +39,8 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        scoreText.text = $"Score: {gemCount}";
+
         isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.1f, groundLayer);
       
 
