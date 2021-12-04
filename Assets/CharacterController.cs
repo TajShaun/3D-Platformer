@@ -41,7 +41,7 @@ public class CharacterController : MonoBehaviour
     {
         scoreText.text = $"Score: {gemCount}";
 
-        isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.1f, groundLayer);
+        isOnGround = Physics.CheckSphere(groundChecker.transform.position, 0.2f, groundLayer);
       
 
         myAnim.SetBool("isOnGround", isOnGround);
